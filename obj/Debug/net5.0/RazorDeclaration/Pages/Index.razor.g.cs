@@ -82,6 +82,20 @@ using Tarea9.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 11 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+using Tarea9.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+using Tarea9.Data.Repositorio;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/")]
     public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -90,6 +104,20 @@ using Tarea9.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 27 "/Users/dannyozuna/Documents/Tarea9/Pages/Index.razor"
+      
+    List<Vacunados> lsVacunados = new List<Vacunados>();
+    
+    protected async override Task OnInitializedAsync()
+    {
+        lsVacunados = await RepoVacunados.get();
+    }
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IRepoVacunados RepoVacunados { get; set; }
     }
 }
 #pragma warning restore 1591
