@@ -12,8 +12,25 @@ namespace Tarea9.Data.Repositorio{
             this.context = context;
         }
 
-        public async Task<List<Vacunados>> get(){
+        public async Task<List<Vacunados>> Get(){
             return await context.vacunados.ToListAsync();
+        }
+
+        public async Task<List<Provincias>> GetProvincias(){
+            return await context.provincias.ToListAsync();
+        }
+        public async Task<List<tipoDeSangre>> GetTipoDeSangres(){
+            return await context.tipoDeSangre.ToListAsync();
+        }
+
+        public async Task<Vacunados> Add(Vacunados oVacunados){
+            if(oVacunados != null){
+                await context.AddAsync(oVacunados);
+                await context.SaveChangesAsync();
+                return oVacunados;
+            }else{
+                return new Vacunados();
+            }
         }
     }
 }

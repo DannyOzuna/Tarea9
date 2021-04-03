@@ -96,8 +96,8 @@ using Tarea9.Data.Repositorio;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/")]
-    public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/registrar")]
+    public partial class Registrar : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -105,19 +105,31 @@ using Tarea9.Data.Repositorio;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 27 "/Users/dannyozuna/Documents/Tarea9/Pages/Index.razor"
-      
-    List<Vacunados> lsVacunados = new List<Vacunados>();
-    
+#line 111 "/Users/dannyozuna/Documents/Tarea9/Pages/Registrar.razor"
+       
+    Vacunados oVacunados = new Vacunados();
+    List<Provincias> lsProvincias = new List<Provincias>();
+    List<tipoDeSangre> lsSangre = new List<tipoDeSangre>();
+
     protected async override Task OnInitializedAsync()
     {
-        lsVacunados = await RepoVacunados.Get();
+        lsProvincias =  await RepoVacunados.GetProvincias();
+        lsSangre = await RepoVacunados.GetTipoDeSangres();
     }
+
+    private async Task GuardarDatos(){
+        oVacunados.latitud = "123";
+        oVacunados.longitud = "321";
+
+        var crear =  await RepoVacunados.Add(oVacunados);
+        var rs = await js.InvokeAsync<object>("msjAlert", "Registrado Correctamente", "success");
+    } 
 
 #line default
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IRepoVacunados RepoVacunados { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime js { get; set; }
     }
 }
 #pragma warning restore 1591

@@ -45,6 +45,72 @@
         }
       },
       {
+        "HashCode": -402134315,
+        "Kind": "Components.Component",
+        "Name": "Tarea9.Pages.Registrar",
+        "AssemblyName": "Tarea9",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Registrar"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "Tarea9.Pages.Registrar"
+        }
+      },
+      {
+        "HashCode": -640606022,
+        "Kind": "Components.Component",
+        "Name": "Tarea9.Pages.Registrar",
+        "AssemblyName": "Tarea9",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Tarea9.Pages.Registrar"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "Tarea9.Pages.Registrar",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 678501767,
+        "Kind": "Components.Component",
+        "Name": "Tarea9.App",
+        "AssemblyName": "Tarea9",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "App"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "Tarea9.App"
+        }
+      },
+      {
+        "HashCode": -94750050,
+        "Kind": "Components.Component",
+        "Name": "Tarea9.App",
+        "AssemblyName": "Tarea9",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Tarea9.App"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "Tarea9.App",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": -89628824,
         "Kind": "Components.Component",
         "Name": "Tarea9.Shared.SurveyPrompt",
@@ -223,39 +289,6 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "Tarea9.Shared.NavMenu",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 678501767,
-        "Kind": "Components.Component",
-        "Name": "Tarea9.App",
-        "AssemblyName": "Tarea9",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "App"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "Tarea9.App"
-        }
-      },
-      {
-        "HashCode": -94750050,
-        "Kind": "Components.Component",
-        "Name": "Tarea9.App",
-        "AssemblyName": "Tarea9",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Tarea9.App"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "Tarea9.App",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -15850,6 +15883,11 @@
   },
   "RootNamespace": "Tarea9",
   "Documents": [
+    {
+      "FilePath": "/Users/dannyozuna/Documents/Tarea9/Pages/Registrar.razor",
+      "TargetPath": "Pages\\Registrar.razor",
+      "FileKind": "component"
+    },
     {
       "FilePath": "/Users/dannyozuna/Documents/Tarea9/Shared/SurveyPrompt.razor",
       "TargetPath": "Shared\\SurveyPrompt.razor",

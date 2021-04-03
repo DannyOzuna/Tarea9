@@ -15,7 +15,7 @@ namespace Tarea9.Models{
         public string direccion {get; set;}
         public string latitud {get; set;}
         public string longitud {get; set;}
-        public bool covid {get; set;}
+        public int covid {get; set;}
         public string justificacion {get; set;}
     }
 }

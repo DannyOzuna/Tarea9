@@ -9,5 +9,7 @@ namespace Tarea9.Data{
         }
 
         public DbSet<Vacunados> vacunados {get; set;}
+        public DbSet<Provincias> provincias {get; set;}
+        public DbSet<tipoDeSangre> tipoDeSangre {get; set;}
     }
 }

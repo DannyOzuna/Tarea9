@@ -1,0 +1,129 @@
+@page "/registrar"
+@inject IJSRuntime js
+@inject IRepoVacunados RepoVacunados
+
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div class="alert alert-info text-center">
+            <h1>Registrar Solicitud de Vacuna</h1>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-md-2">
+    <div class="card col-10 shadow p-3 mb-5 bg-body rounded">
+      <div class="card-header">
+        <div class="navbar navbar-light bg-light p-0">
+          <div class="container-fluid">
+            <a class="navbar-brand">Verificar Solicitud</a>
+            <div class="d-flex">
+              <input class="form-control mr-2" type="search" placeholder="Digíte su Cédula..." aria-label="Search" style="width: 60%;">
+              <button class="btn btn-outline-success btn-md"><i class="oi oi-magnifying-glass"></i> Buscar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+        <EditForm Model="oVacunados" OnValidSubmit="@(() => GuardarDatos())">
+            <div class="card-body">
+                <DataAnnotationsValidator/>
+                <div class="row justify-content-center mb-3">
+                    <div class="col-4">
+                        <label>Nombre:</label>
+                        <InputText @bind-Value="oVacunados.nombre" class="form-control"/>
+                        <ValidationMessage For="() => oVacunados.nombre"/>
+                    </div>
+                    <div class="col-4">
+                        <label>Apellidos:</label>
+                        <InputText @bind-Value="oVacunados.apellido" class="form-control"/>
+                        <ValidationMessage For="() => oVacunados.apellido"/>
+                    </div>
+                    <div class="col-4">
+                        <label>Cédula:</label>
+                        <InputText @bind-Value="oVacunados.cedula" class="form-control"/>
+                        <ValidationMessage For="() => oVacunados.cedula"/>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-3">
+                    <div class="col-4">
+                        <label>Télefono:</label>
+                        <InputText @bind-Value="oVacunados.telefono" class="form-control"/>
+                        <ValidationMessage For="() => oVacunados.telefono"/>
+                    </div>
+                    <div class="col-4">
+                        <label>Correo Electrónico:</label>
+                        <InputText @bind-Value="oVacunados.email" class="form-control"/>
+                        <ValidationMessage For="() => oVacunados.email"/>
+                    </div>
+                    <div class="col-4">
+                        <label>Tipo Sangre:</label>
+                        <InputSelect @bind-Value="oVacunados.tipo_sangre" class="form-control">
+                            <option value="">Seleccione T. de Sangre...</option>
+                            @foreach (var item in lsSangre)
+                            {
+                                 <option value="@item.id">@item.SangreTipo</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="() => oVacunados.tipo_sangre"/>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-3">
+                    <div class="col-4">
+                        <label>Provincia:</label>
+                        <InputSelect @bind-Value="oVacunados.provincia" class="form-control">
+                            <option value="">Seleccione Su Provincia...</option>
+                            @foreach (var item in lsProvincias)
+                            {
+                                 <option value="@item.ProvinciaID">@item.nombre</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="() => oVacunados.provincia"/>
+                    </div>
+                    <div class="col-4">
+                        <label>Le ha dado covid:</label>
+                        <InputSelect @bind-Value="oVacunados.covid" class="form-control">
+                            <option value="0">No</option>
+                            <option value="1">Sí</option>
+                        </InputSelect>
+                        <ValidationMessage For="() => oVacunados.covid"/>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+                <div class="row justify-content-center mb-3">
+                    <div class="col-6">
+                        <label>Dirección:</label>
+                        <textarea rows="3" @bind-value="oVacunados.direccion" @bind-value:event="oninput" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label>Justificación:</label>
+                        <textarea rows="3" @bind-value="oVacunados.justificacion" @bind-value:event="oninput" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row justify-content-center">
+                    <button type="submit" class="btn btn-outline-primary col-8 bn-lg">Guardar</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    Vacunados oVacunados = new Vacunados();
+    List<Provincias> lsProvincias = new List<Provincias>();
+    List<tipoDeSangre> lsSangre = new List<tipoDeSangre>();
+
+    protected async override Task OnInitializedAsync()
+    {
+        lsProvincias =  await RepoVacunados.GetProvincias();
+        lsSangre = await RepoVacunados.GetTipoDeSangres();
+    }
+
+    private async Task GuardarDatos(){
+        oVacunados.latitud = "123";
+        oVacunados.longitud = "321";
+
+        var crear =  await RepoVacunados.Add(oVacunados);
+        var rs = await js.InvokeAsync<object>("msjAlert", "Registrado Correctamente", "success");
+    } 
+}    
