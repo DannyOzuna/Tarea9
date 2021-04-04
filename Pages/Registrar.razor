@@ -1,6 +1,7 @@
 @page "/registrar"
 @inject IJSRuntime js
 @inject IRepoVacunados RepoVacunados
+@using System.Net.Mail
 
 <div class="row justify-content-center">
     <div class="col-8">
@@ -9,6 +10,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="row justify-content-center mt-md-2">
     <div class="card col-10 shadow p-3 mb-5 bg-body rounded">
@@ -105,6 +107,8 @@
                 </div>
             </div>
         </EditForm>
+
+        <h1>@Mensage</h1>
     </div>
 </div>
 
@@ -125,5 +129,58 @@
 
         var crear =  await RepoVacunados.Add(oVacunados);
         var rs = await js.InvokeAsync<object>("msjAlert", "Registrado Correctamente", "success");
-    } 
+        EnviarMensaje();
+
+
+    }
+
+
+
+    private string Mensage {get; set; } = "";
+
+    public void EnviarMensaje()
+    {
+        try
+        {
+            using(MailMessage mail = new MailMessage())
+            {
+
+                mail.From =  new MailAddress("ventanilla781444@gmail.com");
+                mail.To.Add(oVacunados.email);
+                mail.Subject = "Cita Para la Confirmacion de la Vacuna";
+                mail.Body = $"<h1> Nombre:'{oVacunados.nombre}'" +
+                        $"Apellido: '{oVacunados.apellido}' " +
+                        $"Telefono: '{oVacunados.telefono}'" +
+                        $"Cedula: '{oVacunados.cedula}'" +
+                        $"Tipo de Sangra: '{oVacunados.tipo_sangre}'" +
+                        $"</h1>";
+                mail.IsBodyHtml = true;
+
+
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com",587))
+                {
+                    smtp.Credentials = new System.Net.NetworkCredential("ventanilla781444@gmail.com", "HOLAMUNDO");
+                    smtp.EnableSsl =true;
+                    smtp.Send(mail);
+                    var rs = js.InvokeAsync<object>("msjAlert", "Se envio una copia a su correo", "success");
+
+                }
+
+
+            }
+
+
+
+
+         }
+        catch(Exception x){
+
+            Mensage = x.Message;
+
+         }
+
+
+
+     }
+
 }    

@@ -1794,24 +1794,31 @@
     ]
   },
   "packageFolders": {
-    "/Users/dannyozuna/.nuget/packages/": {}
+    "C:\\Users\\Ernest Sanchez\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/dannyozuna/Documents/Tarea9/Tarea9.csproj",
+      "projectUniqueName": "D:\\5 cuatrimestre\\Programación III\\unidad 9\\Tarea9\\Tarea9.csproj",
       "projectName": "Tarea9",
-      "projectPath": "/Users/dannyozuna/Documents/Tarea9/Tarea9.csproj",
-      "packagesPath": "/Users/dannyozuna/.nuget/packages/",
-      "outputPath": "/Users/dannyozuna/Documents/Tarea9/obj/",
+      "projectPath": "D:\\5 cuatrimestre\\Programación III\\unidad 9\\Tarea9\\Tarea9.csproj",
+      "packagesPath": "C:\\Users\\Ernest Sanchez\\.nuget\\packages\\",
+      "outputPath": "D:\\5 cuatrimestre\\Programación III\\unidad 9\\Tarea9\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "/Users/dannyozuna/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Ernest Sanchez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1857,7 +1864,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.201/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

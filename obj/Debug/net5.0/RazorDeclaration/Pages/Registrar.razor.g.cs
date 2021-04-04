@@ -13,85 +13,92 @@ namespace Tarea9.Pages
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+#line 1 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+#line 2 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
 using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+#line 3 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
 using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+#line 4 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+#line 5 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+#line 6 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+#line 7 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+#line 8 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+#line 9 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
 using Tarea9;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+#line 10 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
 using Tarea9.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+#line 11 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
 using Tarea9.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 12 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+#line 12 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
 using Tarea9.Data.Repositorio;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\Pages\Registrar.razor"
+using System.Net.Mail;
 
 #line default
 #line hidden
@@ -105,7 +112,7 @@ using Tarea9.Data.Repositorio;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 111 "/Users/dannyozuna/Documents/Tarea9/Pages/Registrar.razor"
+#line 117 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\Pages\Registrar.razor"
        
     Vacunados oVacunados = new Vacunados();
     List<Provincias> lsProvincias = new List<Provincias>();
@@ -123,7 +130,68 @@ using Tarea9.Data.Repositorio;
 
         var crear =  await RepoVacunados.Add(oVacunados);
         var rs = await js.InvokeAsync<object>("msjAlert", "Registrado Correctamente", "success");
-    } 
+        EnviarMensaje();
+
+
+    }
+
+
+
+    private string Mensage {get; set; } = "";
+
+    public void EnviarMensaje()
+    {
+        try
+        {
+            using(MailMessage mail = new MailMessage())
+            {
+
+                mail.From =  new MailAddress("ventanilla781444@gmail.com");
+                mail.To.Add(oVacunados.email);
+                mail.Subject = "Cita Para la Confirmacion de la Vacuna";
+                mail.Body = $"<h1> Nombre:'{oVacunados.nombre}'" +
+                        $"Apellido: '{oVacunados.apellido}' " +
+                        $"Telefono: '{oVacunados.telefono}'" +
+                        $"Cedula: '{oVacunados.cedula}'" +
+                        $"Tipo de Sangra: '{oVacunados.tipo_sangre}'" +
+                        $"</h1>";
+                mail.IsBodyHtml = true;
+
+
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com",587))
+                {
+                    smtp.Credentials = new System.Net.NetworkCredential("ventanilla781444@gmail.com", "HOLAMUNDO");
+                    smtp.EnableSsl =true;
+                    smtp.Send(mail);
+                    var rs = js.InvokeAsync<object>("msjAlert", "Se envio una copia a su correo", "success");
+
+                }
+
+
+            }
+
+
+
+
+        }
+        catch(Exception x){
+
+            Mensage = x.Message;
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
 
 #line default
 #line hidden
