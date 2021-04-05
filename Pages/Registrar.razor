@@ -157,17 +157,23 @@
             using(MailMessage mail = new MailMessage())
             {
 
-                mail.From =  new MailAddress("ventanilla781444@gmail.com");
+             mail.From =  new MailAddress("ventanilla781444@gmail.com");
                 mail.To.Add(oVacunados.email);
                 mail.Subject = "Cita Para la Confirmacion de la Vacuna";
-                mail.Body = $"<h1> Nombre:'{oVacunados.nombre}'" +
-                        $"Apellido: '{oVacunados.apellido}' " +
-                        $"Telefono: '{oVacunados.telefono}'" +
-                        $"Cedula: '{oVacunados.cedula}'" +
-                        $"Tipo de Sangra: '{oVacunados.tipo_sangre}'" +
-                        $"</h1>";
+                mail.Body ="<td style=background-color: #ecf0f1>"+
+                        "<div style=color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif>"+
+                        "<h2 style=color: #e67e22; margin: 0 0 7px>Copia del formulario!</h2>"+
+                        $"<li> Nombre:'{oVacunados.nombre}'</li>" +
+                        $"<li>Apellido: '{oVacunados.apellido}' </li>" +
+                        $"<li>Telefono: '{oVacunados.telefono}'</li>" +
+                        $"<li>Cedula: '{oVacunados.cedula}'</li>" +
+                        $"<li>Provincia: '{oVacunados.provincia}'</li>" +
+                        $"<li>Direccion: '{oVacunados.direccion}'</li>" +
+                        $"<li>Justificacion: '{oVacunados.justificacion}'</li>" +
+                        $"<li>Te ha dado covid: '{oVacunados.covid}'</li>" +
+                        $"<li>Tipo de Sangra: '{oVacunados.tipo_sangre}'</li>" ;
+                        
                 mail.IsBodyHtml = true;
-
 
                 using (SmtpClient smtp = new SmtpClient("smtp.gmail.com",587))
                 {
