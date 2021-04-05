@@ -181,3 +181,5 @@ D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\obj\Debug\net5.0\Tarea9.dll
 D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\obj\Debug\net5.0\ref\Tarea9.dll
 D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\obj\Debug\net5.0\Tarea9.pdb
 D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\obj\Debug\net5.0\Tarea9.genruntimeconfig.cache
+D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\obj\Debug\net5.0\RazorDeclaration\Pages\Informacion.razor.g.cs
+D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\obj\Debug\net5.0\Razor\Pages\Informacion.razor.g.cs

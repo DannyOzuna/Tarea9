@@ -112,7 +112,7 @@ using System.Net.Mail;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 117 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\Pages\Registrar.razor"
+#line 115 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\Pages\Registrar.razor"
        
     Vacunados oVacunados = new Vacunados();
     List<Provincias> lsProvincias = new List<Provincias>();
@@ -173,24 +173,16 @@ using System.Net.Mail;
 
 
 
-        }
+         }
         catch(Exception x){
 
             Mensage = x.Message;
 
-        }
+         }
 
 
 
-    }
-
-
-
-
-
-
-
-
+     }
 
 
 #line default
