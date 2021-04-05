@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Tarea9.Data;
 using Microsoft.EntityFrameworkCore;
 using Tarea9.Data.Repositorio;
+using System.Net.Http;
 
 namespace Tarea9
 {
@@ -30,6 +31,7 @@ namespace Tarea9
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddSingleton<HttpClient>();
             services.AddDbContext<AppDbContext>(
                 optionsAction => optionsAction.UseSqlServer(Configuration.GetConnectionString("Conexion"))
                 );

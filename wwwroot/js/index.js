@@ -24,3 +24,12 @@ function msjConfim(title,text,icon){
           })
     })
 }
+
+function msjValidation(title, text, icon){
+    Swal.fire({
+        icon,
+        title,
+        text,
+        footer: '<a href>Why do I have this issue?</a>'
+      })
+}

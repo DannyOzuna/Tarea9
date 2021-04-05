@@ -13,91 +13,105 @@ namespace Tarea9.Pages
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
+#line 1 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
+#line 2 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
 using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
+#line 3 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
 using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
+#line 4 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
+#line 5 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
+#line 6 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
+#line 7 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
+#line 8 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
+#line 9 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
 using Tarea9;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
+#line 10 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
 using Tarea9.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
+#line 11 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
 using Tarea9.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 12 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\_Imports.razor"
+#line 12 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
 using Tarea9.Data.Repositorio;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\Pages\Registrar.razor"
+#line 13 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+using System.Net;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 14 "/Users/dannyozuna/Documents/Tarea9/_Imports.razor"
+using System.Net.Http.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "/Users/dannyozuna/Documents/Tarea9/Pages/Registrar.razor"
 using System.Net.Mail;
 
 #line default
@@ -112,11 +126,13 @@ using System.Net.Mail;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 117 "D:\5 cuatrimestre\Programación III\unidad 9\Tarea9\Pages\Registrar.razor"
+#line 119 "/Users/dannyozuna/Documents/Tarea9/Pages/Registrar.razor"
        
     Vacunados oVacunados = new Vacunados();
     List<Provincias> lsProvincias = new List<Provincias>();
     List<tipoDeSangre> lsSangre = new List<tipoDeSangre>();
+
+    private string Mensage {get; set; } = "";
 
     protected async override Task OnInitializedAsync()
     {
@@ -125,19 +141,25 @@ using System.Net.Mail;
     }
 
     private async Task GuardarDatos(){
-        oVacunados.latitud = "123";
-        oVacunados.longitud = "321";
+
+        //Para obtener la latitud y longitud mediante la ip
+        var datos = http.GetFromJsonAsync<Localicacion>("http://ip-api.com/json/");
+        var ip = datos.Result;
+
+        oVacunados.latitud = ip.lat.ToString();
+        oVacunados.longitud = ip.lon.ToString();
 
         var crear =  await RepoVacunados.Add(oVacunados);
-        var rs = await js.InvokeAsync<object>("msjAlert", "Registrado Correctamente", "success");
-        EnviarMensaje();
 
 
+        if(crear != null){
+            var rs = await js.InvokeAsync<object>("msjAlert", "Registrado Correctamente", "success");
+            EnviarMensaje();
+        }else{
+            var rs = await js.InvokeAsync<object>("msjValidation", "Existe", "Esta solicitud está creada!", "error");
+        }
     }
 
-
-
-    private string Mensage {get; set; } = "";
 
     public void EnviarMensaje()
     {
@@ -163,17 +185,12 @@ using System.Net.Mail;
                     smtp.Credentials = new System.Net.NetworkCredential("ventanilla781444@gmail.com", "HOLAMUNDO");
                     smtp.EnableSsl =true;
                     smtp.Send(mail);
-                    var rs = js.InvokeAsync<object>("msjAlert", "Se envio una copia a su correo", "success");
-
+                    var rs = js.InvokeAsync<object>("msjAlert", "Correo Enviado!...", "success");
+                    NavigationManager.NavigateTo("/");
                 }
-
-
             }
 
-
-
-
-        }
+         }
         catch(Exception x){
 
             Mensage = x.Message;
@@ -182,21 +199,15 @@ using System.Net.Mail;
 
 
 
-    }
-
-
-
-
-
-
-
-
+     }
 
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient http { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IRepoVacunados RepoVacunados { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime js { get; set; }
     }
 }

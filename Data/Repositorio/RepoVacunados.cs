@@ -25,9 +25,18 @@ namespace Tarea9.Data.Repositorio{
 
         public async Task<Vacunados> Add(Vacunados oVacunados){
             if(oVacunados != null){
-                await context.AddAsync(oVacunados);
-                await context.SaveChangesAsync();
-                return oVacunados;
+                //Validamos si existe un registro de vacuna
+                var rs = await context.vacunados.FirstOrDefaultAsync(v => v.cedula == oVacunados.cedula);
+                
+                if(rs == null){
+                    await context.AddAsync(oVacunados);
+                    await context.SaveChangesAsync();
+                    return oVacunados;
+                }else{
+                    return null;
+                }
+                
+
             }else{
                 return new Vacunados();
             }

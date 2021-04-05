@@ -1,7 +1,9 @@
 @page "/registrar"
 @inject IJSRuntime js
+@inject NavigationManager NavigationManager
 @inject IRepoVacunados RepoVacunados
 @using System.Net.Mail
+@inject HttpClient http
 
 <div class="row justify-content-center">
     <div class="col-8">
@@ -94,10 +96,12 @@
                     <div class="col-6">
                         <label>Dirección:</label>
                         <textarea rows="3" @bind-value="oVacunados.direccion" @bind-value:event="oninput" class="form-control" />
+                        <ValidationMessage For="() => oVacunados.direccion"/>
                     </div>
                     <div class="col-6">
                         <label>Justificación:</label>
                         <textarea rows="3" @bind-value="oVacunados.justificacion" @bind-value:event="oninput" class="form-control" />
+                        <ValidationMessage For="() => oVacunados.justificacion"/>
                     </div>
                 </div>
             </div>
@@ -117,6 +121,8 @@
     List<Provincias> lsProvincias = new List<Provincias>();
     List<tipoDeSangre> lsSangre = new List<tipoDeSangre>();
 
+    private string Mensage {get; set; } = "";
+
     protected async override Task OnInitializedAsync()
     {
         lsProvincias =  await RepoVacunados.GetProvincias();
@@ -124,19 +130,25 @@
     }
 
     private async Task GuardarDatos(){
-        oVacunados.latitud = "123";
-        oVacunados.longitud = "321";
+
+        //Para obtener la latitud y longitud mediante la ip
+        var datos = http.GetFromJsonAsync<Localicacion>("http://ip-api.com/json/");
+        var ip = datos.Result;
+
+        oVacunados.latitud = ip.lat.ToString();
+        oVacunados.longitud = ip.lon.ToString();
 
         var crear =  await RepoVacunados.Add(oVacunados);
-        var rs = await js.InvokeAsync<object>("msjAlert", "Registrado Correctamente", "success");
-        EnviarMensaje();
 
 
+        if(crear != null){
+            var rs = await js.InvokeAsync<object>("msjAlert", "Registrado Correctamente", "success");
+            EnviarMensaje();
+        }else{
+            var rs = await js.InvokeAsync<object>("msjValidation", "Existe", "Esta solicitud está creada!", "error");
+        }
     }
 
-
-
-    private string Mensage {get; set; } = "";
 
     public void EnviarMensaje()
     {
@@ -162,22 +174,17 @@
                     smtp.Credentials = new System.Net.NetworkCredential("ventanilla781444@gmail.com", "HOLAMUNDO");
                     smtp.EnableSsl =true;
                     smtp.Send(mail);
-                    var rs = js.InvokeAsync<object>("msjAlert", "Se envio una copia a su correo", "success");
-
+                    var rs = js.InvokeAsync<object>("msjAlert", "Correo Enviado!...", "success");
+                    NavigationManager.NavigateTo("/");
                 }
-
-
             }
-
-
-
 
          }
         catch(Exception x){
 
             Mensage = x.Message;
 
-         }
+        }
 
 
 

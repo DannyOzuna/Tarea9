@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\5 cuatrimestre\\Programación III\\unidad 9\\Tarea9\\Tarea9.csproj": {}
+    "/Users/dannyozuna/Documents/Tarea9/Tarea9.csproj": {}
   },
   "projects": {
-    "D:\\5 cuatrimestre\\Programación III\\unidad 9\\Tarea9\\Tarea9.csproj": {
+    "/Users/dannyozuna/Documents/Tarea9/Tarea9.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\5 cuatrimestre\\Programación III\\unidad 9\\Tarea9\\Tarea9.csproj",
+        "projectUniqueName": "/Users/dannyozuna/Documents/Tarea9/Tarea9.csproj",
         "projectName": "Tarea9",
-        "projectPath": "D:\\5 cuatrimestre\\Programación III\\unidad 9\\Tarea9\\Tarea9.csproj",
-        "packagesPath": "C:\\Users\\Ernest Sanchez\\.nuget\\packages\\",
-        "outputPath": "D:\\5 cuatrimestre\\Programación III\\unidad 9\\Tarea9\\obj\\",
+        "projectPath": "/Users/dannyozuna/Documents/Tarea9/Tarea9.csproj",
+        "packagesPath": "/Users/dannyozuna/.nuget/packages/",
+        "outputPath": "/Users/dannyozuna/Documents/Tarea9/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Ernest Sanchez\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "/Users/dannyozuna/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,6 +38,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Blazor.HttpClient": {
+              "target": "Package",
+              "version": "[3.2.0-preview3.20168.3, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.0-preview.2.21154.2, )"
@@ -71,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.201/RuntimeIdentifierGraph.json"
         }
       }
     }
